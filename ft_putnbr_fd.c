@@ -12,44 +12,29 @@
 
 #include "libft.h"
 
-int	get_karg(int n);
-
-int	power_of_ten(int n)
-{
-	int	ten;
-
-	ten = 1;
-	while (n > 0)
-	{
-		n --;
-		ten *= 10;
-	}
-	return (ten);
-}
-
 void	ft_putnbr_fd(int n, int fd)
 {
 	char	zero;
-	int		karg;
-	int		i;
 
-	i = 0;
+	zero = '0';
 	if (n == -2147483648)
 	{
-		write (fd, "-2147483648", 11);
+		write(fd, "-2147483648", 11);
 		return ;
 	}
 	if (n < 0)
 	{
-		n *= -1;
-		write (fd, "-", 1);
+		write(fd, "-", 1);
+		ft_putnbr_fd(-n, fd);
+		return ;
 	}
-	karg = get_karg(n);
-	while (i < karg)
+	if (n < 10)
 	{
-		zero = '0' + (n / power_of_ten(karg - i - 1));
-		write (fd, &zero, 1);
-		n -= (n / power_of_ten(karg - i - 1)) * power_of_ten(karg - i - 1);
-		i++;
+		zero += n;
+		write(fd, &zero, 1);
+		return ;
 	}
+	ft_putnbr_fd(n / 10, fd);
+	zero += n % 10;
+	write (fd, &zero, 1);
 }
