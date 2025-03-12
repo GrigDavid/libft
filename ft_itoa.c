@@ -12,7 +12,7 @@
 
 #include "libft.h"
 
-int	get_karg(int n)
+static int	get_karg(int n)
 {
 	int	karg;
 
@@ -25,7 +25,7 @@ int	get_karg(int n)
 	return (karg);
 }
 
-void	fill(char *num, int karg, int n, int sign)
+static void	fill(char *num, int karg, int n, int sign)
 {
 	num[karg + sign] = '\0';
 	while (karg > 0)
